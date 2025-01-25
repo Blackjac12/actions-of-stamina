@@ -21,7 +21,10 @@ version = System.getenv("GITHUB_HASH") ?: "${mc_version}-${mod_version}"
 
 java {
     archivesBaseName = 'actions-of-stamina'
-    toolchain.languageVersion = JavaLanguageVersion.of(17)
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+        vendor = JvmVendorSpec.ADOPTIUM
+    }
 }
 
 minecraft {
@@ -140,6 +143,10 @@ repositories {
 
     }
     maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+    maven {
+        name = 'AdoptOpenJDK'
+        url = 'https://adoptopenjdk.jfrog.io/adoptopenjdk/maven/'
+    }
 
     flatDir name: 'libs', dirs: "$projectDir/libs"
 
